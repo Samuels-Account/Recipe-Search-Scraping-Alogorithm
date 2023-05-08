@@ -8,29 +8,21 @@ chrome_options = Options()
 chrome_options.add_argument("--headless")  # Run Chrome in headless mode
 driver = webdriver.Chrome(executable_path='/path/to/chromedriver', options=chrome_options)
 
-# Navigate to the recipe page and extract recipe information
-url = 'https://realfood.tesco.com/recipes/salmon-skewers.html'
+# Navigate to the home page
+url = 'https://realfood.tesco.com/'
 driver.get(url)
 
-title = driver.find_element(By.CLASS_NAME, 'recipe-detail__headline').text
-description = driver.find_element(By.CLASS_NAME, 'recipe-detail__intro').text
-serving = driver.find_element(By.CLASS_NAME, 'recipe-detail__meta-item_servings').text
-time = driver.find_element(By.CLASS_NAME, 'recipe-detail__meta-item_time').text
-calories = driver.find_element(By.CLASS_NAME, 'recipe-detail__meta-item_calories').text
-ingredients_list = driver.find_element(By.ID, "recipeingredients").find_element(By.CLASS_NAME, "recipe-detail__list")
-ingredients = [x.text for x in ingredients_list.find_elements(By.CLASS_NAME, "recipe-detail__list-item")]
+links = set()
 
-method_list = driver.find_element(By.ID, "method").find_element(By.CLASS_NAME, "recipe-detail__cms").find_element(By.TAG_NAME, "ol")
-method = [x.text for x in method_list.find_elements(By.TAG_NAME, "li")]
+recipes = [x.get_attribute("href") for x in driver.find_elements(By.CLASS_NAME, "hp-grid-carousel__link")]
 
-# Print recipe information
-print('Title:', title)
-print('Description:', description)
-print('Serving:', serving)
-print('Time:', time)
-print('Calories:', calories)
-print('Ingredients:', ingredients)
-print('Method:', method)
+recipes2 = [x for x in recipes if x.startswith(url + "recipes/")]
+
+links.add(recipes2[0])
+
+print(links)
+
+
 
 # Close Chrome driver
 driver.quit()
