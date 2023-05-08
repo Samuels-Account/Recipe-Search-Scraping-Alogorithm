@@ -17,11 +17,11 @@ description = driver.find_element(By.CLASS_NAME, 'recipe-detail__intro').text
 serving = driver.find_element(By.CLASS_NAME, 'recipe-detail__meta-item_servings').text
 time = driver.find_element(By.CLASS_NAME, 'recipe-detail__meta-item_time').text
 calories = driver.find_element(By.CLASS_NAME, 'recipe-detail__meta-item_calories').text
-#ingredients_list = driver.find_element(By.XPATH, '//div[@class="recipe-detail"]/ul[@class="ingredients-list"]')
-#ingredients = [li.text for li in ingredients_list.find_elements(By.TAG_NAME, 'li')]
+ingredients_list = driver.find_element(By.ID, "recipeingredients").find_element(By.CLASS_NAME, "recipe-detail__list")
+ingredients = [x.text for x in ingredients_list.find_elements(By.CLASS_NAME, "recipe-detail__list-item")]
 
-#method_list = driver.find_element(By.XPATH, '//div[@class="recipe-detail"]/ol[@class="method-list"]')
-#method = [li.text for li in method_list.find_elements(By.TAG_NAME, 'li')]
+method_list = driver.find_element(By.ID, "method").find_element(By.CLASS_NAME, "recipe-detail__cms").find_element(By.TAG_NAME, "ol")
+method = [x.text for x in method_list.find_elements(By.TAG_NAME, "li")]
 
 # Print recipe information
 print('Title:', title)
@@ -29,8 +29,8 @@ print('Description:', description)
 print('Serving:', serving)
 print('Time:', time)
 print('Calories:', calories)
-#print('Ingredients:', ingredients)
-#print('Method:', method)
+print('Ingredients:', ingredients)
+print('Method:', method)
 
 # Close Chrome driver
 driver.quit()
