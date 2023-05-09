@@ -1,7 +1,7 @@
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.by import By
 
-def processrecipe(driver: Chrome, url: str) -> dict:
+def process_recipe(driver: Chrome, url: str) -> dict:
 	output = {
 		"title": "",
 		"description": "",
