@@ -50,7 +50,7 @@ TABLE_NAME = "Unknown"
 
 with open("recipes.sql", "w") as file:
 	for recipe in recipeInfo:
-		file.write("INSERT INTO `{}` VALUES (\"{}\",\"{}\",\"{}\",\"{}\",\"{}\");".format(TABLE_NAME, recipe["title"], recipe["description"], recipe["serving"], recipe["time"], recipe["calories"]))
+		file.write("INSERT INTO `{}` VALUES (\"{}\",\"{}\",\"{}\",\"{}\",\"{}\");\n".format(TABLE_NAME, recipe["title"], recipe["description"], recipe["serving"], recipe["time"], recipe["calories"]))
 
 # Close Chrome driver
 driver.quit()
