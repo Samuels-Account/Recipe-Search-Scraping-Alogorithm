@@ -44,8 +44,6 @@ while i < len(links):
 
 	i += 1
 
-recipeInfo = list(set(recipeInfo)) # Remove duplicates
-
 TABLE_NAME = "Unknown"
 
 with open("recipes.sql", "w") as file:
