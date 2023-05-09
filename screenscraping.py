@@ -4,8 +4,8 @@ from selenium.webdriver.common.by import By
 from processrecipe import process_recipe
 import random
 
-NUM_LINKS = 5
-LINKS_PER_CRAWL = 1
+NUM_LINKS = 5 # Number of total links to crawl. Links will be obtained from each crawled page
+LINKS_PER_CRAWL = 1 # How many related links to store from each page
 
 print("Warming up Selenium...")
 # Set up Chrome driver
@@ -52,8 +52,8 @@ while i < len(links):
 
 	i += 1
 
-TABLE_NAME = "Recipes"
-STARTING_ID = 0
+TABLE_NAME = "Recipes" # Table to write values to
+STARTING_ID = 0 # ID to start the RecipeID column at, this needs to be set correcly before and after every use
 
 with open("recipes.sql", "w") as file:
 	for recipe in recipeInfo:
