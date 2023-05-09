@@ -34,7 +34,11 @@ recipeInfo = []
 i = 0
 while i < len(links):
 	print(f"Processing recipe {i+1}/{NUM_LINKS}...")
-	recipe = process_recipe(driver, links[i])
+	try:
+		recipe = process_recipe(driver, links[i])
+	except:
+		i += 1
+		continue
 	if recipe["title"] != "Error":
 		recipeInfo.append(recipe)
 		if len(recipeInfo) >= NUM_LINKS:
