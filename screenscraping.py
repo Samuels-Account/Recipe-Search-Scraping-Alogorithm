@@ -24,7 +24,7 @@ recipes = [x.get_attribute("href") for x in driver.find_elements(By.CLASS_NAME, 
 
 recipes2 = [x for x in recipes if x.startswith(url + "recipes/")]
 
-links.append(recipes2[0])
+links.append(random.choice(recipes2))
 
 print("Links found!")
 
