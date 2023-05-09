@@ -5,6 +5,7 @@ from processrecipe import process_recipe
 import random
 
 NUM_LINKS = 5
+LINKS_PER_CRAWL = 1
 
 print("Warming up Selenium...")
 # Set up Chrome driver
@@ -40,7 +41,14 @@ while i < len(links):
 			break
 	else:
 		print("Recipe not found")
-	links.append(random.choice(recipe["promo_links"]))
+
+	ls = list(recipe["promo_links"])
+	j = 0
+	while j < LINKS_PER_CRAWL:
+		randoms = random.choice(ls)
+		links.append(randoms)
+		ls.remove(randoms)
+		j += 1
 
 	i += 1
 
