@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from processrecipe import process_recipe
 
 
 # Set up Chrome driver
@@ -20,9 +21,11 @@ recipes2 = [x for x in recipes if x.startswith(url + "recipes/")]
 
 links.add(recipes2[0])
 
-print(links)
+recipeInfo = []
 
+recipeInfo.append(process_recipe(driver, list(links)[0]))
 
+print(recipeInfo)
 
 # Close Chrome driver
 driver.quit()
