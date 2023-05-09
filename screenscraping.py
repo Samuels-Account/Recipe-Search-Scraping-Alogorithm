@@ -43,6 +43,9 @@ while i < len(links):
 			links.add(link)
 			break
 
+	if not any([x in links for x in recipe["promo_links"]]):
+		links.add(recipe["promo_links"][-1])
+
 	i += 1
 
 # Close Chrome driver
