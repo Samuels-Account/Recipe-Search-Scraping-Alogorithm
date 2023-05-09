@@ -32,12 +32,14 @@ print("Links found!")
 recipeInfo = []
 
 i = 0
+failed_parses = 0
 while i < len(links):
-	print(f"Processing recipe {i+1}/{NUM_LINKS}...")
+	print(f"Processing recipe {i+1}/{NUM_LINKS + failed_parses}...")
 	try:
 		recipe = process_recipe(driver, links[i])
 	except:
 		i += 1
+		failed_parses += 1
 		continue
 	if recipe["title"] != "Error":
 		recipeInfo.append(recipe)
