@@ -44,13 +44,17 @@ while i < len(links):
 
 	i += 1
 
-TABLE_NAME = "Unknown"
+TABLE_NAME = "Recipes"
+STARTING_ID = 0
 
 with open("recipes.sql", "w") as file:
 	for recipe in recipeInfo:
-		file.write("INSERT INTO `{}` VALUES (\"{}\",\"{}\",\"{}\",\"{}\",\"{}\");\n".format(TABLE_NAME, recipe["title"], recipe["description"], recipe["serving"], recipe["time"], recipe["calories"]))
+		file.write("INSERT INTO `{}` VALUES (\"{}\", \"{}\", \"{}\", \"{}\", \"{}\", \"{}\", \"{}\", \"{}\");\n".format(TABLE_NAME, STARTING_ID, recipe["title"], recipe["description"], recipe["serving"], recipe["time"], recipe["calories"], "%%%".join(recipe["ingredients"]), "%%%".join(recipe["method"]).strip("\n")))
+		STARTING_ID += 1
 
 # Close Chrome driver
 driver.quit()
+
+print("STARTING_ID Incremented to " + str(STARTING_ID))
 
 
