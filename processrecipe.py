@@ -16,6 +16,11 @@ def process_recipe(driver: Chrome, url: str) -> dict:
 	# Go to the recipe url
 	driver.get(url)
 
+	if "search.php" in driver.current_url:
+		output["title"] = "Error"
+		output["promo_links"] = [x.get_attribute("href") for x in driver.find_elements(By.CLASS_NAME, "ddl-search-results__item-link")]
+		return output
+
 	output["title"] = driver.find_element(By.CLASS_NAME, 'recipe-detail__headline').text
 	output["description"] = driver.find_element(By.CLASS_NAME, 'recipe-detail__intro').text
 	output["serving"] = driver.find_element(By.CLASS_NAME, 'recipe-detail__meta-item_servings').text
