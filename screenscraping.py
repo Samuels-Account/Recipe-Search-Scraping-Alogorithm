@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from processrecipe import process_recipe
 
+NUM_LINKS = 5
 
 # Set up Chrome driver
 chrome_options = Options()
@@ -23,9 +24,18 @@ links.add(recipes2[0])
 
 recipeInfo = []
 
-recipeInfo.append(process_recipe(driver, list(links)[0]))
+i = 0
+while i < len(links):
+	recipe = process_recipe(driver, list(links)[i])
+	recipeInfo.append(recipe)
+	if len(links) >= NUM_LINKS:
+		break
+	for link in recipe["promo_links"]:
+		if not link in links:
+			links.add(link)
+			break
 
-print(recipeInfo)
+	i += 1
 
 # Close Chrome driver
 driver.quit()
