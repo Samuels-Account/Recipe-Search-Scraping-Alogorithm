@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from processrecipe import process_recipe
+import random
 
 NUM_LINKS = 5
 
@@ -38,7 +39,7 @@ while i < len(links):
 		if len(recipeInfo) >= NUM_LINKS:
 			break
 	for link in recipe["promo_links"]:
-		if not link in links:
+		if not link in links and random.randint(0,1) == 1:
 			links.add(link)
 			break
 
