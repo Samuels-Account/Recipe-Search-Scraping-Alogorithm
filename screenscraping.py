@@ -38,13 +38,9 @@ while i < len(links):
 		recipeInfo.append(recipe)
 		if len(recipeInfo) >= NUM_LINKS:
 			break
-	for link in recipe["promo_links"]:
-		if not link in links and random.randint(0,1) == 1:
-			links.add(link)
-			break
-
-	if not any([x in links for x in recipe["promo_links"]]):
-		links.add(recipe["promo_links"][-1])
+	else:
+		print("Recipe not found")
+	links.append(random.choice(recipe["promo_links"]))
 
 	i += 1
 
