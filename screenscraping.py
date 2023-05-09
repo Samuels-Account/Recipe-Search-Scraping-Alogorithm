@@ -44,6 +44,14 @@ while i < len(links):
 
 	i += 1
 
+recipeInfo = list(set(recipeInfo)) # Remove duplicates
+
+TABLE_NAME = "Unknown"
+
+with open("recipes.sql", "w") as file:
+	for recipe in recipeInfo:
+		file.write("INSERT INTO `{}` VALUES (\"{}\",\"{}\",\"{}\",\"{}\",\"{}\");".format(TABLE_NAME, recipe["title"], recipe["description"], recipe["serving"], recipe["time"], recipe["calories"]))
+
 # Close Chrome driver
 driver.quit()
 
