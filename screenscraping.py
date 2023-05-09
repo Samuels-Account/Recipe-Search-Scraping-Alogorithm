@@ -18,13 +18,13 @@ print(f"Accessing \"{url}\"...")
 driver.get(url)
 
 print("Searching for promo links...")
-links = set()
+links = []
 
 recipes = [x.get_attribute("href") for x in driver.find_elements(By.CLASS_NAME, "hp-grid-carousel__link")]
 
 recipes2 = [x for x in recipes if x.startswith(url + "recipes/")]
 
-links.add(recipes2[0])
+links.append(recipes2[0])
 
 print("Links found!")
 
@@ -33,7 +33,7 @@ recipeInfo = []
 i = 0
 while i < len(links):
 	print(f"Processing recipe {i+1}/{NUM_LINKS}...")
-	recipe = process_recipe(driver, list(links)[i])
+	recipe = process_recipe(driver, links[i])
 	if recipe["title"] != "Error":
 		recipeInfo.append(recipe)
 		if len(recipeInfo) >= NUM_LINKS:
